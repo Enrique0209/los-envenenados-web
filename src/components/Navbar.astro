@@ -1,0 +1,81 @@
+---
+---
+
+<nav class="navbar">
+  <a href="/" class="navbar__logo">Los Envenenados</a>
+
+  <div class="navbar__actions">
+    <a href="https://www.didifood.com" target="_blank" rel="noopener noreferrer" class="navbar__badge" aria-label="Pedir por DiDi Food">
+      <i class="fa-solid fa-motorcycle"></i>
+    </a>
+    <a href="https://www.ubereats.com" target="_blank" rel="noopener noreferrer" class="navbar__badge" aria-label="Pedir por Uber Eats">
+      <i class="fa-solid fa-bag-shopping"></i>
+    </a>
+    <a href="https://www.instagram.com/losenvenenados_taqueria" target="_blank" rel="noopener noreferrer" class="navbar__social">
+      <i class="fa-brands fa-instagram"></i>
+    </a>
+  </div>
+</nav>
+
+<style>
+  .navbar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    background-color: #1a1a1a;
+    border-bottom: 2px solid #EA1C25;
+  }
+
+  .navbar__logo {
+    color: #F5F5F0;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 0.95rem;
+    white-space: nowrap;
+  }
+
+  .navbar__actions {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .navbar__badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: #EA1C25;
+    color: #F5F5F0;
+    font-size: 0.9rem;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+
+  .navbar__social {
+    color: #F5F5F0;
+    font-size: 1.1rem;
+    display: none;
+  }
+
+  @media (min-width: 480px) {
+    .navbar {
+      padding: 1rem 1.5rem;
+    }
+
+    .navbar__logo {
+      font-size: 1.1rem;
+    }
+
+    .navbar__social {
+      display: inline;
+    }
+  }
+</style>

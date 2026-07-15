@@ -1,0 +1,103 @@
+---
+const platillos = [
+  {
+    nombre: 'Envenenado',
+    descripcion: 'El envenenado original — veneno de la casa con queso',
+    precio: 30,
+  },
+  {
+    nombre: 'Envenenado especial',
+    descripcion: 'El veneno de la casa, queso y proteína (de tu elección)',
+    precio: 40,
+  },
+  {
+    nombre: 'Envenenado súper',
+    descripcion: 'El veneno de la casa, queso, bistec o proteína de tu elección, papas y cebolla',
+    precio: 45,
+  },
+];
+---
+
+<section class="menu" id="menu">
+  <h2 class="menu__title">Nuestros Envenenados</h2>
+
+  <div class="menu__list">
+    {platillos.map((platillo) => (
+      <article class="menu__item">
+        <div class="menu__item-header">
+          <h3 class="menu__item-name">{platillo.nombre}</h3>
+          <span class="menu__item-price">${platillo.precio}</span>
+        </div>
+        <p class="menu__item-description">{platillo.descripcion}</p>
+      </article>
+    ))}
+  </div>
+</section>
+
+<style>
+  .menu {
+    background-color: #1a1a1a;
+    padding: 2.5rem 1.25rem;
+  }
+
+  .menu__title {
+    color: #F5F5F0;
+    font-size: 1.4rem;
+    font-weight: bold;
+    text-align: center;
+    margin: 0 0 1.5rem;
+  }
+
+  .menu__list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .menu__item {
+    background-color: #2b2b2b;
+    border-radius: 8px;
+    padding: 1rem;
+  }
+
+  .menu__item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.75rem;
+  }
+
+  .menu__item-name {
+    color: #EA1C25;
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin: 0;
+  }
+
+  .menu__item-price {
+    color: #F5F5F0;
+    font-size: 1.1rem;
+    font-weight: bold;
+    white-space: nowrap;
+  }
+
+  .menu__item-description {
+    color: #F5F5F0;
+    opacity: 0.85;
+    font-size: 0.9rem;
+    margin: 0.4rem 0 0;
+  }
+
+  @media (min-width: 480px) {
+    .menu {
+      padding: 4rem 1.5rem;
+    }
+
+    .menu__title {
+      font-size: 1.8rem;
+      margin-bottom: 2rem;
+    }
+  }
+</style>
