@@ -1,8 +1,12 @@
 ---
+import { Image } from 'astro:assets';
+import logo from '../assets/logo-blanco.png';
 ---
 
 <nav class="navbar">
-  <a href="/" class="navbar__logo">Los Envenenados</a>
+  <a href="/" class="navbar__logo">
+    <Image src={logo} alt="Los Envenenados" class="navbar__logo-img" widths={[200, 400]} sizes="200px" />
+  </a>
 
   <div class="navbar__actions">
     <a href="https://www.didifood.com" target="_blank" rel="noopener noreferrer" class="navbar__badge" aria-label="Pedir por DiDi Food">
@@ -26,17 +30,22 @@
     align-items: center;
     justify-content: space-between;
     gap: 0.5rem;
-    padding: 0.75rem 1rem;
+    padding: 0.5rem 1rem;
     background-color: #1a1a1a;
     border-bottom: 2px solid #EA1C25;
   }
 
   .navbar__logo {
-    color: #F5F5F0;
-    font-weight: bold;
-    text-decoration: none;
-    font-size: 0.95rem;
-    white-space: nowrap;
+    display: flex;
+    align-items: center;
+  }
+
+  .navbar__logo-img {
+    height: 28px;
+    width: auto;
+    max-width: 120px;
+    object-fit: contain;
+    display: block;
   }
 
   .navbar__actions {
@@ -62,20 +71,16 @@
   .navbar__social {
     color: #F5F5F0;
     font-size: 1.1rem;
-    display: none;
+    display: inline;
   }
 
   @media (min-width: 480px) {
     .navbar {
-      padding: 1rem 1.5rem;
+      padding: 0.75rem 1.5rem;
     }
 
-    .navbar__logo {
-      font-size: 1.1rem;
-    }
-
-    .navbar__social {
-      display: inline;
+    .navbar__logo-img {
+      height: 38px;
     }
   }
 </style>
