@@ -1,0 +1,155 @@
+---
+const apiKey = import.meta.env.PLACES_API_KEY;
+const placeId = import.meta.env.PLACES_ID;
+
+let reseñas = [];
+let rating = null;
+let totalReseñas = null;
+let errorCarga = false;
+
+try {
+  const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=rating,reviews,user_ratings_total&language=es&key=${apiKey}`;
+  const res = await fetch(url);
+  const data = await res.json();
+
+  if (data.status === 'OK') {
+    rating = data.result.rating;
+    totalReseñas = data.result.user_ratings_total;
+    reseñas = (data.result.reviews ?? []).slice(0, 3);
+  } else {
+    console.error('Places API status:', data.status, data.error_message);
+    errorCarga = true;
+  }
+} catch (e) {
+  console.error('Fetch a Places API falló:', e.message);
+  errorCarga = true;
+}
+---
+
+<section class="reviews" id="reviews">
+  <h2 class="reviews__title">Lo que dicen de nosotros</h2>
+
+  {rating && (
+    <p class="reviews__summary">
+      ⭐ {rating} · {totalReseñas} reseñas en Google
+    </p>
+  )}
+
+  {errorCarga && (
+    <p class="reviews__error">
+      No pudimos cargar las reseñas en este momento.
+    </p>
+  )}
+
+  {!errorCarga && reseñas.length > 0 && (
+    <div class="reviews__list">
+      {reseñas.map((reseña) => (
+        <article class="reviews__item">
+          <div class="reviews__item-header">
+            <span class="reviews__item-author">{reseña.author_name}</span>
+            <span class="reviews__item-stars">{'⭐'.repeat(reseña.rating)}</span>
+          </div>
+          <p class="reviews__item-text">{reseña.text}</p>
+        </article>
+      ))}
+    </div>
+  )}
+
+  <a
+    class="reviews__cta"
+    href={`https://search.google.com/local/writereview?placeid=${placeId}`}
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    Ver todas las reseñas en Google
+  </a>
+</section>
+
+<style>
+  .reviews {
+    background-color: #1a1a1a;
+    padding: 2.5rem 1.25rem;
+  }
+
+  .reviews__title {
+    color: #F5F5F0;
+    font-size: 1.4rem;
+    font-weight: bold;
+    text-align: center;
+    margin: 0 0 0.75rem;
+  }
+
+  .reviews__summary {
+    color: #EA1C25;
+    font-weight: bold;
+    text-align: center;
+    margin: 0 0 1.5rem;
+  }
+
+  .reviews__error {
+    color: #F5F5F0;
+    opacity: 0.7;
+    text-align: center;
+    font-size: 0.9rem;
+  }
+
+  .reviews__list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 600px;
+    margin: 0 auto 1.5rem;
+  }
+
+  .reviews__item {
+    background-color: #2b2b2b;
+    border-radius: 8px;
+    padding: 1rem;
+  }
+
+  .reviews__item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.75rem;
+  }
+
+  .reviews__item-author {
+    color: #F5F5F0;
+    font-weight: bold;
+    font-size: 0.95rem;
+  }
+
+  .reviews__item-stars {
+    font-size: 0.85rem;
+    white-space: nowrap;
+  }
+
+  .reviews__item-text {
+    color: #F5F5F0;
+    opacity: 0.85;
+    font-size: 0.9rem;
+    margin: 0.4rem 0 0;
+    line-height: 1.4;
+  }
+
+  .reviews__cta {
+    display: block;
+    text-align: center;
+    color: #EA1C25;
+    font-weight: bold;
+    font-size: 0.95rem;
+    text-decoration: underline;
+  }
+
+  @media (min-width: 480px) {
+    .reviews {
+      padding: 4rem 1.5rem;
+    }
+
+    .reviews__title {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+  }
+</style>

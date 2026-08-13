@@ -1,0 +1,84 @@
+---
+const puntos = [
+  {
+    titulo: 'El veneno de la casa',
+    texto: 'Una salsa secreta que se cocina a fuego lento — es la que le da el nombre y el sabor que no vas a encontrar en cualquier taquería.',
+  },
+  {
+    titulo: 'Origen zacatecano',
+    texto: 'El taco envenenado nace en Zacatecas. En Toluca casi no se encuentra — nosotros lo trajimos tal cual, sin atajos.',
+  },
+  {
+    titulo: 'Una mordida basta',
+    texto: 'No es un taco más picoso. Es una combinación de sabores que se siente distinta desde la primera mordida.',
+  },
+];
+---
+
+<section class="about-dish" id="que-es">
+  <h2 class="about-dish__title">¿Qué es un taco envenenado?</h2>
+
+  <div class="about-dish__list">
+    {puntos.map((punto) => (
+      <article class="about-dish__item">
+        <h3 class="about-dish__item-title">{punto.titulo}</h3>
+        <p class="about-dish__item-text">{punto.texto}</p>
+      </article>
+    ))}
+  </div>
+</section>
+
+<style>
+  .about-dish {
+    background-color: #2b2b2b;
+    padding: 2.5rem 1.25rem;
+  }
+
+  .about-dish__title {
+    color: #F5F5F0;
+    font-size: 1.4rem;
+    font-weight: bold;
+    text-align: center;
+    margin: 0 0 1.5rem;
+  }
+
+  .about-dish__list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .about-dish__item {
+    background-color: #1a1a1a;
+    border-radius: 8px;
+    padding: 1rem;
+  }
+
+  .about-dish__item-title {
+    color: #EA1C25;
+    font-size: 1.05rem;
+    font-weight: bold;
+    margin: 0 0 0.4rem;
+  }
+
+  .about-dish__item-text {
+    color: #F5F5F0;
+    opacity: 0.85;
+    font-size: 0.9rem;
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  @media (min-width: 480px) {
+    .about-dish {
+      padding: 4rem 1.5rem;
+    }
+
+    .about-dish__title {
+      font-size: 1.8rem;
+      margin-bottom: 2rem;
+    }
+  }
+</style>
